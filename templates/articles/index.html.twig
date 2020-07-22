@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticlesController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .codes {background: #dec; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Liste des articles ✅</h1>
+	<hr>
+	{%for article in articles%}
+    <div class="row">
+        
+			<div class="col-6 mb-3 codes p-2 text-center">
+				<h2><a href="{{ path('actualites_article', {'slug': article.slug}) }}">{{ article.titre }}</a></h2>
+				<img class="img" src="http://placehold.it/160x150" alt="image">
+				<p><small class="text-muted m-2">Posté le {{ article.createdAt | date('d/m/Y')  }} à {{ article.createdAt | date('H:i') }}</small></p>
+			</div>
+			<div class="col-6 text-justify">{{ article.contenu | raw }}</div>
+			
+        
+    </div>
+    <hr><br>
+    {%endfor%}
+    {{ knp_pagination_render(articles) }}
+</div>
+{% endblock %}
